@@ -1,0 +1,139 @@
+cleanup:
+  branch_retention_days: 7
+  log_archive: file
+  worktree_prune: immediate
+investigation:
+  command_allowlist:
+  - ls
+  - find
+  - wc
+  - grep
+  - cat
+  - head
+  - tail
+  - git log
+  - git status
+  - git diff
+  - git ls-files
+  - git blame
+  - git branch
+  - go build
+  - go test
+  - go mod
+  - go vet
+  - npm test
+  - npm run
+  - npm ls
+  - python -m pytest
+  - python -m py_compile
+  - make
+  - docker ps
+  - docker-compose config
+memory:
+  enabled: true
+merge:
+  auto_merge: true
+  base_branch: main
+  mode: local
+  pr_template: '## Story: {story_id}
+
+    {description}
+
+    ### Acceptance Criteria
+
+    {acceptance_criteria}
+
+    '
+  review_before_merge: false
+models:
+  intermediate:
+    fallback_cooldown_s: 60
+    google_model: gemma-4-26b-a4b-it
+    max_tokens: 4000
+    model: gemma4:e4b
+    provider: ollama
+  investigator:
+    fallback_cooldown_s: 60
+    google_model: gemma-4-26b-a4b-it
+    max_tokens: 16000
+    model: gemma4:e4b
+    provider: ollama
+  junior:
+    fallback_cooldown_s: 60
+    google_model: gemma-4-26b-a4b-it
+    max_tokens: 4000
+    model: gemma4:e4b
+    provider: ollama
+  manager:
+    fallback_cooldown_s: 60
+    google_model: gemma-4-26b-a4b-it
+    max_tokens: 8000
+    model: gemma4:e4b
+    provider: ollama
+  qa:
+    fallback_cooldown_s: 60
+    google_model: gemma-4-26b-a4b-it
+    max_tokens: 8000
+    model: gemma4:e4b
+    provider: ollama
+  senior:
+    fallback_cooldown_s: 60
+    google_model: gemma-4-26b-a4b-it
+    max_tokens: 8000
+    model: gemma4:e4b
+    provider: ollama
+  supervisor:
+    fallback_cooldown_s: 60
+    google_model: gemma-4-26b-a4b-it
+    max_tokens: 4000
+    model: gemma4:e4b
+    provider: ollama
+  tech_lead:
+    fallback_cooldown_s: 60
+    google_model: gemma-4-26b-a4b-it
+    max_tokens: 16000
+    model: gemma4:e4b
+    provider: ollama
+monitor:
+  context_freshness_tokens: 150000
+  poll_interval_ms: 10000
+  stuck_threshold_s: 120
+planning:
+  godmode: false
+  max_story_complexity: 5
+  sequential_file_patterns:
+  - package.json
+  - '*.config.*'
+  - src/core/*
+plugins:
+  playbooks: []
+  prompts: {}
+  providers: {}
+  qa: []
+routing:
+  intermediate_max_complexity: 5
+  junior_max_complexity: 3
+  max_manager_attempts: 2
+  max_qa_failures_before_escalation: 3
+  max_retries_before_escalation: 2
+  max_senior_retries: 2
+runtimes:
+  gemma:
+    command_allowlist:
+    - go build ./...
+    - go test ./...
+    - go vet ./...
+    - go mod tidy
+    - make
+    max_iterations: 20
+    models:
+    - gemma4
+    native: true
+version: '1.0'
+workspace:
+  backend: sqlite
+  log_level: info
+  log_retention_days: 30
+  state_dir: ~/.nxd
+  update_check: true
+  update_interval_hours: 48
